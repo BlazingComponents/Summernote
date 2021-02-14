@@ -1,0 +1,20 @@
+@using Microsoft.JSInterop
+@inject IJSRuntime Js
+
+<div style="width:100%;min-width:50px;">
+    <div id="@NoteId">@Content</div>
+    <div align="right">
+        @if (_edit)
+        {
+            <button class="btn btn-primary" @onclick="Save">
+                <span class="oi oi-lock-locked"></span>
+            </button>
+        }
+        else
+        {
+            <button class="btn btn-primary" @onclick="Edit">
+                <span class="oi oi-lock-unlocked"></span>
+            </button>
+        }
+    </div>
+</div>
