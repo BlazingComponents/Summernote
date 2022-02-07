@@ -26,6 +26,9 @@ namespace BlazingComponents.Summernote
 
         [Parameter] public EventCallback<string> ContentChanged { get; set; }
 
+        [Parameter]
+        public bool ShowEditButton { get; set; } = false;
+
         private string NoteId { get; } = $"BlazingSummerNote{new Random().Next(0, 1000000).ToString()}";
 
         private void EditorUpdate(object sender, MarkupString editorText)
