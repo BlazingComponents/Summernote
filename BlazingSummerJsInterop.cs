@@ -1,5 +1,6 @@
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace BlazingComponents.Summernote
@@ -10,7 +11,7 @@ namespace BlazingComponents.Summernote
         private readonly DotNetObjectReference<BlazingSummerJsInterop> _dotNetObjectReference;
         private readonly string _id;
 
-        public BlazingSummerJsInterop(IJSRuntime jsRuntime, string id, EventHandler<string> onChange)
+        public BlazingSummerJsInterop(IJSRuntime jsRuntime, string id, EventHandler<MarkupString> onChange)
         {
             _dotNetObjectReference = DotNetObjectReference.Create(this);
             EditorUpdate += onChange;
@@ -47,13 +48,13 @@ namespace BlazingComponents.Summernote
         [JSInvokable]
         public async Task<bool> OnTextChange(string editorText)
         {
-            EditorUpdate?.Invoke(null, editorText);
+            EditorUpdate?.Invoke(null, (MarkupString)editorText);
             return await Task.FromResult(true);
         }
 
-        public event EventHandler<string> EditorUpdate;
+        public event EventHandler<MarkupString> EditorUpdate;
 
-        public async Task<bool> Edit(string content)
+        public async Task<bool> Edit(MarkupString content)
         {
             Console.WriteLine("Edit()ModuleTask");
             var module = await _moduleTask.Value;

@@ -2,7 +2,9 @@
 @inject IJSRuntime Js
 
 <div style="width:100%;min-width:50px;">
-    <div id="@NoteId">@Content</div>
+    <div id="@NoteId">@_markupContent</div>
+    @if (ShowEditButton)
+    {
     <div align="right">
         @if (_edit)
         {
@@ -17,4 +19,5 @@
             </button>
         }
     </div>
+    }
 </div>
